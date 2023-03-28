@@ -14,5 +14,11 @@ namespace FilmesAPI.Controllers
         {
             filmes.Add(filme);
         }
+
+        [HttpGet]
+        public IEnumerable<Filme> BuscarFilmes()
+        {
+            return filmes;
+        }
     }
 }
