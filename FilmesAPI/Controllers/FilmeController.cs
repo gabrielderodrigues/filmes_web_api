@@ -11,11 +11,11 @@ namespace FilmesAPI.Controllers
         private static int Id = 1;
 
         [HttpPost]
-        public string AdicionaFilme([FromBody] Filme filme)
+        public IActionResult AdicionaFilme([FromBody] Filme filme)
         {
             filme.Id = Id++;
             filmes.Add(filme);
-            return $"'{filme.Titulo}' adicionado com sucesso!"; 
+            return CreatedAtAction(nameof(BuscarFilmePorId), new { id = filme.Id }, filme);
         }
 
         [HttpGet]
@@ -25,17 +25,19 @@ namespace FilmesAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public Filme? BuscarFilmePorId(int id)
+        public IActionResult BuscarFilmePorId(int id)
         {
             var output = filmes.FirstOrDefault(f => f.Id.Equals(id));
-            return output;
+
+            if (output == null) return NotFound();
+            return Ok(output);
         }
 
         [HttpDelete("{id}")]
         public string DeletarFilmePorId(int id)
         {
-            var filme = BuscarFilmePorId(id);
-            return filmes.Remove(filme) ? $"Filme deletado com sucesso." : "Não foi possível deletar o filme.";
+            var output = filmes.FirstOrDefault(f => f.Id.Equals(id));
+            return filmes.Remove(output) ? $"Filme deletado com sucesso." : "Não foi possível deletar o filme.";
         }
     }
 }
