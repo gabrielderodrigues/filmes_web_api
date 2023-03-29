@@ -24,11 +24,18 @@ namespace FilmesAPI.Controllers
             return filmes;
         }
 
-        [HttpGet("{idFilme}")]
-        public Filme? BuscarFilmePorId(int idFilme)
+        [HttpGet("{id}")]
+        public Filme? BuscarFilmePorId(int id)
         {
-            var output = filmes.FirstOrDefault(f => f.Id.Equals(idFilme));
+            var output = filmes.FirstOrDefault(f => f.Id.Equals(id));
             return output;
+        }
+
+        [HttpDelete("{id}")]
+        public string DeletarFilmePorId(int id)
+        {
+            var filme = BuscarFilmePorId(id);
+            return filmes.Remove(filme) ? $"Filme deletado com sucesso." : "Não foi possível deletar o filme.";
         }
     }
 }
