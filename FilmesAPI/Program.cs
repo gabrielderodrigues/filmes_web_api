@@ -3,7 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Connection with DB
 builder.Services.AddDbContext<FilmeContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("FilmeConnection")));
+
+// Add AutoMap extension
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Add services to the container.
 

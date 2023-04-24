@@ -5,7 +5,7 @@
 namespace FilmesAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Create_Table_Filme : Migration
+    public partial class Create_Filme_Table : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
