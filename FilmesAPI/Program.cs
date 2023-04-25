@@ -9,6 +9,9 @@ builder.Services.AddDbContext<FilmeContext>(opts => opts.UseSqlServer(builder.Co
 // Add AutoMap extension
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+// Add NewtonSoft
+builder.Services.AddControllers().AddNewtonsoftJson();
+
 // Add services to the container.
 
 builder.Services.AddControllers();
