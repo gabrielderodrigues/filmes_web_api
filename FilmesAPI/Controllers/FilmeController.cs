@@ -21,7 +21,14 @@ namespace FilmesAPI.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Adiciona um filme no banco de dados.
+        /// </summary>
+        /// <param name="filmeDto">Objeto necessário para criação de um filme.</param>
+        /// <returns>IActionResult</returns>
+        /// <response code="201">Caso a inserção seja feita com sucesso.</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public IActionResult AdicionaFilme([FromBody] CreateFilmeDto filmeDto)
         {
             var filme = _mapper.Map<Filme>(filmeDto);
@@ -30,6 +37,12 @@ namespace FilmesAPI.Controllers
             return CreatedAtAction(nameof(BuscarFilmePorId), new { id = filme.Id }, filme);
         }
 
+        /// <summary>
+        /// Busca todos os filmes no banco de dados.
+        /// </summary>
+        /// <param name="filmeDto">Objeto necessário para criação de um filme.</param>
+        /// <returns>IActionResult</returns>
+        /// <response code="201">Caso a inserção seja feita com sucesso.</response>
         [HttpGet]
         public IEnumerable<ReadFilmeDto> BuscarFilmes([FromQuery] int skip = 0, [FromQuery] int take = int.MaxValue)
         {
