@@ -49,6 +49,12 @@ namespace FilmesAPI.Controllers
             return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes.Skip(skip).Take(take));
         }
 
+        /// <summary>
+        /// Busca filme no banco de dados.
+        /// </summary>
+        /// <param name="id">Parâmetro necessário para busca do filme</param>
+        /// <returns>IActionResult</returns>
+        /// <response code="201">Caso a busca seja feita com sucesso.</response>
         [HttpGet("{id}")]
         public IActionResult BuscarFilmePorId(int id)
         {
@@ -61,6 +67,13 @@ namespace FilmesAPI.Controllers
             return Ok(filmeDto);
         }
 
+        /// <summary>
+        /// Atualiza filme no banco de dados.
+        /// </summary>
+        /// <param name="id">Parâmetro necessário para busca do filme.</param>
+        /// <param name="filmeDto">Objeto necessário para alteração do filme.</param>
+        /// <returns>IActionResult</returns>
+        /// <response code="201">Caso a alteração seja feita com sucesso.</response>
         [HttpPut("{id}")]
         public IActionResult AtualizaFilme(int id, [FromBody] UpdateFilmeDto filmeDto)
         {
@@ -73,6 +86,13 @@ namespace FilmesAPI.Controllers
             return Ok(filme);
         }
 
+        /// <summary>
+        /// Atualiza filme no banco de dados.
+        /// </summary>
+        /// <param name="id">Parâmetro necessário para busca do filme.</param>
+        /// <param name="patch">Objeto necessário para alteração do filme.</param>
+        /// <returns>IActionResult</returns>
+        /// <response code="201">Caso a alteração seja feita com sucesso.</response>
         [HttpPatch("{id}")]
         public IActionResult AtualizaFilmePatch(int id, JsonPatchDocument<UpdateFilmeDto> patch)
         {
@@ -91,6 +111,12 @@ namespace FilmesAPI.Controllers
             return Ok(filme);
         }
 
+        /// <summary>
+        /// Deleta filme pelo Id.
+        /// </summary>
+        /// <param name="filmeDto">Parâmetro necessário para deletar filme no banco de dados.</param>
+        /// <returns>IActionResult</returns>
+        /// <response code="201">Caso a remoção seja feita com sucesso.</response>
         [HttpDelete("{id}")]
         public IActionResult DeletaFilme(int id)
         {
