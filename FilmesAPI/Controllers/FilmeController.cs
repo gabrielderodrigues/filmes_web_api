@@ -15,6 +15,13 @@ namespace FilmesAPI.Controllers
         private FilmeContext _context;
         private IMapper _mapper;
 
+        /// <summary>
+        /// Construtor da Controller Filme.
+        /// </summary>
+        /// <param name="context">Integração com banco de dados.</param>
+        /// <param name="mapper">Realiza mapeamento das entidades.</param>
+        /// <returns>IActionResult</returns>
+        /// <response code="201">Caso a alteração seja feita com sucesso.</response>
         public FilmeController(FilmeContext context, IMapper mapper)
         {
             _context = context;
@@ -77,7 +84,7 @@ namespace FilmesAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult AtualizaFilme(int id, [FromBody] UpdateFilmeDto filmeDto)
         {
-            var filme = _context.Filmes.FirstOrDefault(f => f.Id.Equals(id));
+            var filme = BuscarFilmePorId(id);
 
             if (filme == null) return NotFound();
 
@@ -96,7 +103,7 @@ namespace FilmesAPI.Controllers
         [HttpPatch("{id}")]
         public IActionResult AtualizaFilmePatch(int id, JsonPatchDocument<UpdateFilmeDto> patch)
         {
-            var filme = _context.Filmes.FirstOrDefault(f => f.Id.Equals(id));
+            var filme = BuscarFilmePorId(id);
 
             if (filme == null) return NotFound();
 
@@ -114,13 +121,13 @@ namespace FilmesAPI.Controllers
         /// <summary>
         /// Deleta filme pelo Id.
         /// </summary>
-        /// <param name="filmeDto">Parâmetro necessário para deletar filme no banco de dados.</param>
+        /// <param name="id">Parâmetro necessário para deletar filme no banco de dados.</param>
         /// <returns>IActionResult</returns>
         /// <response code="201">Caso a remoção seja feita com sucesso.</response>
         [HttpDelete("{id}")]
         public IActionResult DeletaFilme(int id)
         {
-            var filme = _context.Filmes.FirstOrDefault(f => f.Id.Equals(id));
+            var filme = BuscarFilmePorId(id);
 
             if (filme == null) return NotFound();
 
