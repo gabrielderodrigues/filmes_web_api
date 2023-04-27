@@ -2,6 +2,7 @@
 using Azure;
 using FilmesAPI.Data;
 using FilmesAPI.Data.Dto;
+using FilmesAPI.Data.Dto.Filme;
 using FilmesAPI.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
