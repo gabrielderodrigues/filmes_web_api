@@ -6,7 +6,7 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Connection with DB
-builder.Services.AddDbContext<FilmeContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("FilmeConnection")));
+builder.Services.AddDbContext<FilmeContext>(opts => opts.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("FilmeConnection")));
 
 // Add AutoMap extension
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
