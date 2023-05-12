@@ -54,7 +54,7 @@ namespace FilmesAPI.Controllers
         [HttpGet]
         public IEnumerable<ReadFilmeDto> BuscarFilmes([FromQuery] int skip = 0, [FromQuery] int take = int.MaxValue)
         {
-            return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes.Skip(skip).Take(take));
+            return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes.Skip(skip).Take(take).ToList());
         }
 
         /// <summary>
