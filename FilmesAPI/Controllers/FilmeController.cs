@@ -52,9 +52,18 @@ namespace FilmesAPI.Controllers
         /// <returns>IActionResult</returns>
         /// <response code="201">Caso a inserção seja feita com sucesso.</response>
         [HttpGet]
-        public IEnumerable<ReadFilmeDto> BuscarFilmes([FromQuery] int skip = 0, [FromQuery] int take = int.MaxValue)
+        public IEnumerable<ReadFilmeDto> BuscarFilmes([FromQuery] int skip = 0, [FromQuery] int take = int.MaxValue, [FromQuery] string? nomeCinema = null)
         {
-            return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes.Skip(skip).Take(take).ToList());
+            if (nomeCinema == null)
+            {
+                return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes.Skip(skip).Take(take).ToList());
+            }
+
+            return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes
+                .Skip(skip)
+                .Take(take)
+                .Where(filme => filme.Sessoes
+                .Any(sessao => sessao.Cinema.Nome == nomeCinema)));
         }
 
         /// <summary>
